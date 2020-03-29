@@ -33,6 +33,6 @@ class TestCase
         $connection = new RGHConnection(5000, "name", "passwd");
         $master = new CreditMaster("filename", true);
         $validatorID = "myID";
-        $validator = new CreditMaster($connection, $master, $validatorID);
+        $validator = new CreditValidator($connection, $master, $validatorID);
     }
 }
