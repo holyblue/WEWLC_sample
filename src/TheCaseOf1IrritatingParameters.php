@@ -5,7 +5,7 @@ namespace APP;
 
 class CreditValidator
 {
-    public function __construct(RGHConnection $connection,
+    public function __construct(IRGHConnection $connection,
                                 CreditMaster $master,
                                 string $validatorID)
     {
@@ -14,9 +14,11 @@ class CreditValidator
 
 class RGHConnection
 {
-    public function __construct(int $port, string $name, string $passwd)
-    {
-    }
+    public function __construct(int $port, string $name, string $passwd){}
+    public function connect(): void{}
+    public function disconnect(): void{}
+    public function RFDIReportFor(int $id){}
+    public function ACTIOReportFor(int $customerId){}
 }
 
 class CreditMaster
@@ -26,13 +28,17 @@ class CreditMaster
     }
 }
 
-class TestCase
+
+
+
+
+
+
+
+interface IRGHConnection
 {
-    public function testCreate()
-    {
-        $connection = new RGHConnection(5000, "name", "passwd");
-        $master = new CreditMaster("filename", true);
-        $validatorID = "myID";
-        $validator = new CreditValidator($connection, $master, $validatorID);
-    }
+    public function connect(): void;
+    public function disconnect(): void;
+    public function RFDIReportFor(int $id);
+    public function ACTIOReportFor(int $customerId);
 }
