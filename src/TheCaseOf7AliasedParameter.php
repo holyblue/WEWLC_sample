@@ -1,8 +1,6 @@
 <?php
 namespace APP;
 
-use mysql_xdevapi\Exception;
-
 class IndustrialFacility extends Facility
 {
     private $basePermit;

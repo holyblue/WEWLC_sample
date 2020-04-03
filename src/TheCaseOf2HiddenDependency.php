@@ -10,9 +10,19 @@ define('MARK_MESSAGE_OFF', true);
 
 class MailingListDispatcher
 {
-    public function __construct($status = MAIL_OKAY)
+    /**
+     * ***Parameterize Constructor ***
+     * MailingListDispatcher constructor.
+     * @param string $status
+     * @param MailService|null $service
+     */
+    public function __construct($status = MAIL_OKAY, MailService $service = null)
     {
-        $service = new MailService();
+        /// Parameterize Constructor
+        if ($service == null) {
+            $service = new MailService();
+        }
+
         $client_type = 12;
         $service->connect();
 

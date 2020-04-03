@@ -1,8 +1,9 @@
 <?php
 
+use APP\Certificate;
 use APP\CreditMaster;
 use APP\CreditValidator;
-use APP\RGHConnection;
+use APP\RFDIReport;
 use APP\IRGHConnection;
 use PHPUnit\Framework\TestCase;
 
@@ -10,26 +11,29 @@ class CreditValidatorTest extends TestCase
 {
     public function testCreate()
     {
-        $connection = new FakeConnection();
         $master = new CreditMaster("filename", true);
+        $connection = new FakeConnection();
         $validatorID = "myID";
         $validator = new CreditValidator($connection, $master, $validatorID);
+        $connection->report = new RFDIReport(...);
+        $result = $validator->validateCustomer(new Customer());
+        $this->assertEquals(Certificate::VALID, $result->getStatus);
         ///
     }
 }
 
 class FakeConnection implements IRGHConnection
 {
-    public $report;
+    public RFDIReport $report;
 
     public function connect(): void
     {
-        // TODO: Implement connect() method.
+
     }
 
     public function disconnect(): void
     {
-        // TODO: Implement disconnect() method.
+
     }
 
     public function RFDIReportFor(int $id)

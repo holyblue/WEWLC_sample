@@ -13,7 +13,7 @@ class SchedulePane
  */
 class SchedulingTaskPane extends SchedulePane
 {
-    public function __construct(SchedulingTask $task)
+    public function __construct(ISchedulingTask $task)
     {
     }
 }

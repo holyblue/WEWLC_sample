@@ -4,13 +4,25 @@ namespace APP;
 
 class WatercolorPanel
 {
+    private FocusWidget $cursor;
     public function __construct(Form $border, WashBrush $brush, Pattern $backdrop)
     {
         $anteriorPanel = new Panel($border);
         $anteriorPanel->setBorderColor($brush->getForeColor());
         $backgroundPanel = Panel::createBackground($border, $backdrop);
 
-        $cursor = new FocusWidget($brush, $backgroundPanel);
+        /// *** test point ***
+        $this->cursor = new FocusWidget($brush, $backgroundPanel);
+    }
+
+    /**
+     * never call this method on production code
+     * @param FocusWidget $newCursor
+     */
+    public function supersedeCursor(FocusWidget $newCursor)
+    {
+        reset($this->cursor);
+        $this->cursor = $newCursor;
     }
 }
 
